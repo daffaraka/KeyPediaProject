@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/home', [HomeController::class,'home'])->name('home.home');
-
-Route::get('/create-category', [CategoryController::class,'createCategory'])->name('createCategory');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/create-category', [CategoryController::class,'createCategory'])->name('createCategory');
 Route::post('/store-category', [CategoryController::class,'storeCategory'])->name('storeCategory');
 Route::get('/{id}/edit-category', [CategoryController::class,'editCategory'])->name('editCategory');
 Route::post('/{id}/update-category', [CategoryController::class,'updateCategory'])->name('updateCategory');
@@ -37,3 +36,11 @@ Route::post('/{id}/update-product', [HomeController::class,'updateProduct'])->na
 Route::get('/{id}/detail-product', [HomeController::class,'showProduct'])->name('showProduct');
 Route::get('/{id}/destory-product', [HomeController::class,'destroyProduct'])->name('destroyProduct');
 
+});
+Route::get('/index', [HomeController::class,'home'])->name('home.home');
+
+
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');

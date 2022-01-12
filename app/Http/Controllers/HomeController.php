@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index()
     {
         $product = Product::all();
-        return view('home.product.index')->with('product',$product);
+        return view('home.product.index-product')->with('product',$product);
     }
 
     public function listProduct()
