@@ -33,5 +33,7 @@ Route::get('/list-product',[HomeController::class,'listProduct'])->name('listPro
 Route::get('/create-product', [HomeController::class,'createProduct'])->name('createProduct');
 Route::post('/store-product', [HomeController::class,'storeProduct'])->name('storeProduct');
 Route::get('/{id}/edit-product', [HomeController::class,'editProduct'])->name('editProduct');
-Route::post('/{id}/update-product', [HomeController::class,'createProduct'])->name('updateProduct');
+Route::post('/{id}/update-product', [HomeController::class,'updateProduct'])->name('updateProduct');
 Route::get('/{id}/detail-product', [HomeController::class,'showProduct'])->name('showProduct');
+Route::get('/{id}/destory-product', [HomeController::class,'destroyProduct'])->name('destroyProduct');
+

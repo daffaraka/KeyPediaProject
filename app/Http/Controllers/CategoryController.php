@@ -39,7 +39,7 @@ class CategoryController extends Controller
   
     public function updateCategory(Request $request, $id)
     {
-        Category::find($id)->update($request->all(''));
+        Category::find($id)->update($request->all());
       
         return redirect()->route('createCategory');
     }

@@ -18,8 +18,8 @@
             <!-- Product actions-->
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
                 {{-- <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{route('showProduct',$data->product_id)}}">Detail product</a></div> --}}
-                <a class="btn btn-warning mt-auto" href="{{route('showProduct',$data->product_id)}}">Edit Product</a>
-                <a class="btn btn-outline-danger mt-auto" href="{{route('showProduct',$data->product_id)}}">Hapus Produk</a>
+                <a class="btn btn-warning mt-auto" href="{{route('editProduct',$data->product_id)}}">Edit Product</a>
+                <a class="btn btn-outline-danger mt-auto" href="{{route('destroyProduct',$data->product_id)}}">Hapus Produk</a>
 
             </div>
         </div>
