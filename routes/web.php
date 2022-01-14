@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Models\Category;
@@ -20,8 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(['auth'])->group(function () {
-    Route::get('/create-category', [CategoryController::class,'createCategory'])->name('createCategory');
+// Route::middleware(['auth'])->group(function () {
+Route::get('/create-category', [CategoryController::class,'createCategory'])->name('createCategory');
 Route::post('/store-category', [CategoryController::class,'storeCategory'])->name('storeCategory');
 Route::get('/{id}/edit-category', [CategoryController::class,'editCategory'])->name('editCategory');
 Route::post('/{id}/update-category', [CategoryController::class,'updateCategory'])->name('updateCategory');
@@ -36,11 +38,26 @@ Route::post('/{id}/update-product', [HomeController::class,'updateProduct'])->na
 Route::get('/{id}/detail-product', [HomeController::class,'showProduct'])->name('showProduct');
 Route::get('/{id}/destory-product', [HomeController::class,'destroyProduct'])->name('destroyProduct');
 
-});
-Route::get('/index', [HomeController::class,'home'])->name('home.home');
+// });
+// Route::get('/index', [HomeController::class,'home'])->name('home.home');
 
+Route::get('/cart', [CartController::class,'cart'])->name('cart');
+Route::post('/{id}/add-to-cart', [CartController::class,'addToCart'])->name('addToCart');
+Route::get('/{id}/checkout-page', [CartController::class,'checkoutPage'])->name('checkOutPage');
+Route::get('/{id}/update-qty', [CartController::class,'updateQty'])->name('updateQty');
+Route::get('/update-qty-on-page/{id}', [CartController::class,'updateQtyOnPage'])->name('updateQtyOnPage');
+Route::post('/{id}/checkout', [CartController::class,'checkout'])->name('checkout');
+Route::get('/{id}/delete-cart',[CartController::class,'destroyCart'])->name('deleteCart');
 
+Route::get('transaksi', [CartController::class,'transaksi'])->name('transaksi');
+Route::get('{id}/detail-transaksi',[CartController::class,'detailTransaksi'])->name('detailTransaksi');
+
+Route::get('/change-password', function() {
+    return view('auth.passwords.change-password');
+})->name('editPassword');
+Route::post('/update-password', [HomeController::class,'updatePassword'])->name('updatePassword');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/beranda', [HomeController::class, 'beranda'])->name('beranda');

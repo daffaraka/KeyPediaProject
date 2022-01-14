@@ -34,6 +34,8 @@
                         @endforeach
                     </select>
                     <small class="form-text text-muted">Tentukan nama keyboard</small>
+                    
+                  
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1" class="font-weight-bolder">Nama Keyboard</label>
@@ -50,6 +52,16 @@
                     <input type="text" class="form-control" name="deskripsi_product" aria-describedby="emailHelp">
                     <small class="form-text text-muted">Deskripsikan keyboard</small>
                 </div>
+
+                @if (count($errors) > 0)
+                    
+                    <ul class="mt-2">
+                        @foreach ($errors->all() as $error)
+                    
+                            <li class="text text-danger">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
@@ -60,7 +72,12 @@
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
- 
+<script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <script src="{{asset('js/bootstrap.js')}}"></script>
+  </script>
 <script type="text/javascript">
       
      // Show image sebelum upload 

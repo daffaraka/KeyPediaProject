@@ -11,9 +11,21 @@
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Submit</button>
+
+                @if (count($errors) > 0)
+                    
+                    <ul class="mt-2">
+                        @foreach ($errors->all() as $error)
+                            <li class="text text-danger">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
             </form>
         </div>
         <div class="col-md-8">
+          @if (count($category)==0)
+           <h1 class="text-center"> Belum ada category</h1>
+          @else
             <table class="table">
                 <thead>
                   <tr>
@@ -23,6 +35,7 @@
                   </tr>
                 </thead>    
                 <tbody>
+                   
                     @foreach ($category as $data)
                     <tr>
                         <th scope="row">{{$data->id}}</th>
@@ -36,8 +49,14 @@
             
                 </tbody>
               </table>
+            @endif
         </div>
     </div>
 
-    
+    <script>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+      <script src="{{asset('js/bootstrap.js')}}"></script>
+    </script>
 @endsection

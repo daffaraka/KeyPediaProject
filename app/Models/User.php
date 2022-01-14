@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'gender',
+        'address',
+        'tanggal_lahir'
     ];
 
     /**
@@ -41,4 +44,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function Cart()
+    {
+        return $this->hasMany(Cart::class,'cart_id','id');
+    }
 }

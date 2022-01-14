@@ -15,13 +15,24 @@ class CreateTransaksisTable extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->bigIncrements('id_transaksi');
-            $table->unsignedBigInteger('id_produk')->nullable();
-            $table->string('nama_product');
-            $table->decimal('harga_product_cart',12,2)->default(0)->nullable();
-            $table->string('image_product')->nullable();
-            $table->string('transaction_status')->nullable();
+            $table->unsignedBigInteger('id_product');
+            $table->decimal('harga_product',20,2);
+            $table->unsignedBigInteger('id_cart');
+            $table->integer('quantity');
+            $table->decimal('harga_total');
+            $table->string('status_transaksi');
+
+            
             $table->softDeletes();
             $table->timestamps();
+
+           
+        });
+
+        Schema::table('transaksis', function (Blueprint $table ){
+            $table->foreign('id_product')->references('product_id')->on('products')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_cart')->references('cart_id')->on('carts')->onUpdate('cascade')->onDelete('cascade');
+
         });
     }
 

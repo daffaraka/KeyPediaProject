@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $primaryKey = 'product_id';
     protected $fillable = [
-    'product_id	',
+    'product_id',
     'nama_product',
     'harga_product',	
     'deskripsi_product',	
@@ -22,5 +22,9 @@ class Product extends Model
 
     public function Category() {
         return $this->belongsTo(Category::class,'id','category_id'); 
+    }
+
+    public function Transaksi(){
+        return $this->hasMany(Transaksi::class,'id_transaksi','id');
     }
 }
