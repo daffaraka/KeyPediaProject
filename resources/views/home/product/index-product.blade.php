@@ -1,6 +1,7 @@
 @extends('home.layout')
 @section('content')
 
+    <h1>Product Admin</h1>
     <a href="{{route('createProduct')}}" class="btn btn-info mb-2">Tambah product</a>
     <hr style="height:0.2px;">
 
@@ -12,7 +13,7 @@
             <div class="col-3 mb-5">
                 <div class="card h-100 shadow">
                     <!-- Product image-->
-                    <img class="card-img-top rounded p-2 border" src="{{asset('image_product/'.$data->image_product)}}" a/>
+                    <img class="card-img-top rounded p-2 border" src="{{asset('product_image/'.$data->product_image)}}" a/>
                     <!-- Product details-->
                     <div class="card-body p-4 pb-0">
                         <div class="text-center">

@@ -25,10 +25,10 @@ Route::get('/', function () {
 // Route::middleware(['auth'])->group(function () {
 Route::get('/create-category', [CategoryController::class,'createCategory'])->name('createCategory');
 Route::post('/store-category', [CategoryController::class,'storeCategory'])->name('storeCategory');
-Route::get('/{id}/edit-category', [CategoryController::class,'editCategory'])->name('editCategory');
-Route::post('/{id}/update-category', [CategoryController::class,'updateCategory'])->name('updateCategory');
-Route::get('/{id}/detail-category', [CategoryController::class,'showCategory'])->name('showCategory');
-Route::get('/{id}/delete',[CategoryController::class,'destroyCategory'])->name('destroyCategory');
+Route::get('/{category_id}/edit-category', [CategoryController::class,'editCategory'])->name('editCategory');
+Route::post('/{category_id}/update-category', [CategoryController::class,'updateCategory'])->name('updateCategory');
+Route::get('/{category_id}/detail-category', [CategoryController::class,'showCategory'])->name('showCategory');
+Route::get('/{category_id}/delete',[CategoryController::class,'destroyCategory'])->name('destroyCategory');
 
 Route::get('/list-product',[HomeController::class,'listProduct'])->name('listProduct');
 Route::get('/create-product', [HomeController::class,'createProduct'])->name('createProduct');

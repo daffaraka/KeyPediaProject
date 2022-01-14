@@ -15,11 +15,11 @@
             <tbody>
             
               <tr>
-                <td>{{$detailTransaksi->id_transaksi}}</td>
-                <td class="w-25"><img src="{{asset('image_product/'.$detailTransaksi->image_product)}}" class="w-50 rounded pt-2 pb-2"  alt="">
+                <td>{{$detailTransaksi->transaction_id }}</td>
+                <td class="w-25"><img src="{{asset('product_image/'.$detailTransaksi->product_image)}}" class="w-50 rounded pt-2 pb-2"  alt="">
                 </td>
                 <th scope="row">{{$detailTransaksi->quantity}}</th>
-                <td>Rp.{{number_format($detailTransaksi->harga_total)}}</td>    
+                <td>Rp.{{number_format($detailTransaksi->product_price)}}</td>    
                 <td>{{$detailTransaksi->created_at}}</td>
         
                

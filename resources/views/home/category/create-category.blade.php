@@ -6,7 +6,7 @@
                 @csrf
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="font-weight-bolder">Kategori</label>
-                  <input type="text" class="form-control" name="category" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" name="category_name" aria-describedby="emailHelp">
                   <small class="form-text text-muted">Masukkan jenis kategori anda</small>
                 </div>
                 
@@ -38,11 +38,11 @@
                    
                     @foreach ($category as $data)
                     <tr>
-                        <th scope="row">{{$data->id}}</th>
-                        <td>{{$data->category}}</td>
+                        <th scope="row">{{$data->category_id}}</th>
+                        <td>{{$data->category_name}}</td>
                         <td> 
-                            <a href="{{ route('editCategory',['id' => $data->id]) }}" class="btn btn-info">Edit</a>
-                            <a href="{{ route('destroyCategory',['id' => $data->id]) }}" class="btn btn-danger">Delete</a> </td>
+                            <a href="{{ route('editCategory',$data->category_id) }}" class="btn btn-info">Edit</a>
+                            <a href="{{ route('destroyCategory',$data->category_id) }}" class="btn btn-danger">Delete</a> </td>
                         </td>
                       </tr>
                     @endforeach

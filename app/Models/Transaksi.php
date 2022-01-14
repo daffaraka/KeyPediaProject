@@ -9,17 +9,19 @@ class Transaksi extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_transaksi';
+    protected $table ='transactions';
+
+    protected $primaryKey = 'transaction_id';
 
     protected $fillable = [
-        'nama_product',
-        'id_product',
-        'harga_product',	
-        'id_cart',
+        'product_id',
+        'product_name',
+        'product_price',	
+        'cart_id',
         'quantity',	
-        'harga_total',
-        'status_transaksi',
-        'image_product'
+        'transaction_total',
+        'transaction_status',
+        'product_image'
     ];
 
     public $timestamps = true;

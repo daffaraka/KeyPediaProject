@@ -17,13 +17,16 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    
+     protected $primaryKey = 'user_id';
     protected $fillable = [
         'name',
         'email',
         'password',
         'gender',
         'address',
-        'tanggal_lahir'
+        'tanggal_lahir',
+        'role',
     ];
 
     /**
@@ -48,5 +51,17 @@ class User extends Authenticatable
     public function Cart()
     {
         return $this->hasMany(Cart::class,'cart_id','id');
+    }
+
+    public function role(){
+        auth()->user()->role;
+    }
+
+    public function userId(){
+        return $this->user_id;
+    }
+    public function hasRoles($userId, $role)
+    {
+        return User::where('role', $role)->where('user_id', $userId)->get();
     }
 }

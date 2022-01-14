@@ -25,11 +25,11 @@ class CategoryController extends Controller
     public function storeCategory(Request $request)
     {
         $this->validate($request,[
-            'category' => 'required|min:5|max:20',
+            'category_name' => 'required|min:5|max:20',
          ],
         [
-            'category.min' => 'Minimal terdiri dari 5 huruf',
-            'category.required' => 'Diwajibkan mengisi',
+            'category_name.min' => 'Minimal terdiri dari 5 huruf',
+            'category_name.required' => 'Diwajibkan mengisi',
         ]);
 
         Category::create($request->all());

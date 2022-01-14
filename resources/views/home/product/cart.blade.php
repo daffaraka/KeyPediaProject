@@ -27,12 +27,12 @@
                            
                             @csrf
                                 <tr>
-                                    <th scope="row"> <img src="{{asset('image_product/'.$data->image_product)}}" class="border" style="width:120px;" alt=""> </th>
-                                    <td class="pl-5">{{$data->nama_product}}</td>
-                                    <td>Rp.{{number_format($data->harga_product,2)}}</td>
+                                    <th scope="row"> <img src="{{asset('product_image/'.$data->image_product)}}" class="border" style="width:120px;" alt=""> </th>
+                                    <td class="pl-5">{{$data->product_name}}</td>
+                                    <td>Rp.{{number_format($data->product_price,2)}}</td>
 
                                     <form action="{{route('updateQty',$data->cart_id)}}" method="get">
-                                    <td><input id="ticketNum" type="number" name="quantity" min="1" value="{{$data->quantity}}" style="width: 50px;"></td>
+                                    <td><input id="ticketNum" type="number" name="product_quantity" min="1" value="{{$data->product_quantity}}" style="width: 50px;"></td>
                                     <td>{{$data->created_at}}</td>
                                     <td>
                                     

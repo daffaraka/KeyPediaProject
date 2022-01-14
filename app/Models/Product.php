@@ -12,11 +12,11 @@ class Product extends Model
     protected $primaryKey = 'product_id';
     protected $fillable = [
     'product_id',
-    'nama_product',
-    'harga_product',	
-    'deskripsi_product',	
-    'image_product',	
-    'status_product',	
+    'product_name',
+    'product_price',	
+    'product_description',	
+    'product_image',	
+    'product_status',	
     'category_id',
     ];
 
@@ -25,6 +25,6 @@ class Product extends Model
     }
 
     public function Transaksi(){
-        return $this->hasMany(Transaksi::class,'id_transaksi','id');
+        return $this->hasMany(Transaksi::class,'transaction_id','product_id');
     }
 }

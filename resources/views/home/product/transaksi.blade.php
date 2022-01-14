@@ -13,12 +13,12 @@
     <tbody>
       @foreach ($transaksi as $data)
       <tr>
-        <th scope="row">{{$data->id_transaksi}}</th>
-        <td>Rp.{{number_format($data->harga_total)}}</td>    
+        <th scope="row">{{$data->transaction_id }}</th>
+        <td>Rp.{{number_format($data->product_price)}}</td>    
         <td>{{$data->created_at}}</td>
 
         <td>
-          <a href="{{route('detailTransaksi',$data->id_transaksi)}}" class="btn btn-info">Detail Transaksi</a>
+          <a href="{{route('detailTransaksi',$data->transaction_id )}}" class="btn btn-info">Detail Transaksi</a>
         </td>
       </tr>
       

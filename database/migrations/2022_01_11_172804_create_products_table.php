@@ -15,16 +15,23 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('product_id');
-            $table->string('nama_product');
-            $table->decimal('harga_product',12,2);
-            $table->longText('deskripsi_product');
-            $table->string('image_product');
-            $table->string('status_product');
+            $table->string('product_name');
+            $table->integer('product_price');
+            $table->longText('product_description');
+            $table->string('product_image');
+            $table->string('product_status');
             $table->unsignedBigInteger('category_id');
 
             $table->softDeletes();
             $table->timestamps();
         });
+
+        Schema::table('products', function (Blueprint $table) {
+        
+            $table->foreign('category_id')->references('category_id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
+        });
+        
+
     }
 
     /**

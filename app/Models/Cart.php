@@ -14,9 +14,9 @@ class Cart extends Model
     public $primaryKey = 'cart_id';
     
     protected $fillable = [
-        'nama_product',
-        'harga_product',
-        'quantity',
+        'product_name',
+        'product_price',
+        'product_quantity',
         'product_id',
         'user_id',
         'image_product'
@@ -26,10 +26,10 @@ class Cart extends Model
         return $this->hasMany(Product::class,'product_id','product_id');
     }
     public function User(){
-        return $this->hasOne(Product::class,'id','user_id');
+        return $this->hasOne(Product::class,'user_id','user_id');
     }
 
     public function Transaksi(){
-        return $this->hasOne(Product::class,'id_transaksi','cart_id');
+        return $this->hasOne(Transaksi::class,'transaction_id','cart_id');
     }
 }

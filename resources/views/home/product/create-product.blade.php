@@ -18,7 +18,7 @@
                     </div>
         
                     <div class="custom-file">
-                    <input type="file" class="custom-file-input @error('image_product') is-invalid @enderror" name="image_product" id="image_product" >
+                    <input type="file" class="custom-file-input @error('product_image') is-invalid @enderror" name="product_image" id="product_image" >
                     <label class="custom-file-label"></label>
                     </div>
                 </div>                                  
@@ -30,7 +30,7 @@
                     <select type="text" class="form-control" name="category_id" aria-describedby="emailHelp">
                         <option value="">Pilih Kategori</option>
                         @foreach ($category as $data)
-                        <option value="{{$data->id}}" name="category_id">{{$data->category}} </option>
+                        <option value="{{$data->category_id}}" name="category_id">{{$data->category_name}} </option>
                         @endforeach
                     </select>
                     <small class="form-text text-muted">Tentukan nama keyboard</small>
@@ -39,17 +39,17 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1" class="font-weight-bolder">Nama Keyboard</label>
-                    <input type="text" class="form-control" name="nama_product" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" name="product_name" aria-describedby="emailHelp">
                     <small class="form-text text-muted">Tentukan nama keyboard</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1" class="font-weight-bolder">Harga</label>
-                    <input type="text" class="form-control" name="harga_product" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" name="product_price" aria-describedby="emailHelp">
                     <small class="form-text text-muted">Tentukan harga keyboard</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1" class="font-weight-bolder">Deskripsi</label>
-                    <input type="text" class="form-control" name="deskripsi_product" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" name="product_description" aria-describedby="emailHelp">
                     <small class="form-text text-muted">Deskripsikan keyboard</small>
                 </div>
 
@@ -84,7 +84,7 @@
     $(document).ready(function (e) {
     
     
-        $('#image_product').change(function(){
+        $('#product_image').change(function(){
                     
             let reader = new FileReader();
         

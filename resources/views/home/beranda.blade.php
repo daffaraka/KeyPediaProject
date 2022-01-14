@@ -16,14 +16,14 @@
         <div class="col-3 mb-5">
             <div class="card h-00 shadow">
                 <!-- Product image-->
-                <img class="card-img-top rounded p-2 border" src="{{asset('image_product/'.$data->image_product)}}" a/>
+                <img class="card-img-top rounded p-2 border" src="{{asset('product_image/'.$data->product_image)}}" a/>
                 <!-- Product details-->
                 <div class="card-body pb-3">
                     <div class="text-center">
                         <!-- Product name-->
-                        <h5 class="fw-bolder">{{$data->nama_product}}</h5>
+                        <h5 class="fw-bolder">{{$data->product_name}}</h5>
                         <!-- Product price-->
-                        Rp.{{number_format($data->harga_product,2)}}
+                        Rp.{{number_format($data->product_price,2)}}
                     </div>
                 </div>
                 <!-- Product actions-->

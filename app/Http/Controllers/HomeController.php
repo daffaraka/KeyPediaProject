@@ -6,6 +6,7 @@ use App\Http\Requests\UpdatePasswordRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -26,6 +27,7 @@ class HomeController extends Controller
 
     public function listProduct()
     {
+        
         $product = Product::all();
         
         return view('home.product.index-product')->with('product',$product);
@@ -33,7 +35,7 @@ class HomeController extends Controller
 
     public function createProduct()
     {
-        $category = Category::orderBy('category','ASC')->get();
+        $category = Category::orderBy('category_name','ASC')->get();
         return view('home.product.create-product')->with('category',$category);
     }
 
@@ -41,38 +43,40 @@ class HomeController extends Controller
     public function storeProduct(Request $request)
     {
         $this->validate($request,[
-            'nama_product' => 'required|min:5',
-            'harga_product' => 'required|integer',
-            'deskripsi_product' => 'required|min:20',
+            'product_name' => 'required|min:5',
+            'product_price' => 'required|integer',
+            'product_description' => 'required|min:20',
             'category_id' => 'required',
          ], 
         $anu = [
-            'nama_product.required' => 'Nama product wajib di isi',
-            'nama_product.min' => 'Nama product minimal terdiri dari 5 huruf',
-            'harga_product.required' => 'Harga product wajib dicantumkan',
-            'harga_product.integer' => 'Input harus berupa angka',
-            'deskripsi_product.required' => 'Deskripsi product wajib di isi',
-            'deskripsi_product.min' => 'Deskripsi product harus terdiri dari minimal 20 huruf',
+            'product_name.required' => 'Nama product wajib di isi',
+            'product_name.min' => 'Nama product minimal terdiri dari 5 huruf',
+            'product_price.required' => 'Harga product wajib dicantumkan',
+            'product_price.integer' => 'Input harus berupa angka',
+            'product_description.required' => 'Deskripsi product wajib di isi',
+            'product_description.min' => 'Deskripsi product harus terdiri dari minimal 20 huruf',
             'category_id.required' => 'Category id dibutuhkan'
         ]);
 
 
         $productAttribute = [];
 
-        $file =  $request->file('image_product');
+        $file =  $request->file('product_image');
         
         $imagename = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
        
-        $file->move(public_path('image_product'),$request->nama_product.'-'.$imagename);
-      
-        $productAttribute['nama_product'] = $request->nama_product;
-        $productAttribute['harga_product'] = $request->harga_product;
-        $productAttribute['deskripsi_product'] = $request->deskripsi_product;
-        $productAttribute['image_product'] =  $request->nama_product.'-'.$imagename;
-        $productAttribute['status_product'] = 'aktif';
+        $file->move(public_path('product_image'),$request->product_name.'-'.$imagename);
+        
+
+        $productAttribute['product_name'] = $request->product_name;
+        $productAttribute['product_price'] = $request->product_price;
+        $productAttribute['product_description'] = $request->product_description;
+        $productAttribute['product_image'] =  $request->product_name.'-'.$imagename;
+        $productAttribute['product_status'] = 'aktif';
         $productAttribute['category_id'] = $request->category_id;
         
+       
         Product::create($productAttribute);
         return redirect()->route('listProduct');
     }
@@ -84,7 +88,7 @@ class HomeController extends Controller
     {
         $showProduct = Product::find($id);
         $categoryProduct = Product::where('product_id',$id)->pluck('category_id')->first();
-        $namaCategory = Category::where('id',$categoryProduct)->pluck('category')->first();
+        $namaCategory = Category::where('category_id',$categoryProduct)->pluck('category_name')->first();
         
         return view('home.product.detail-product',['namaCategory'=>$namaCategory,'showProduct'=>$showProduct]);
     }
@@ -102,7 +106,7 @@ class HomeController extends Controller
     public function editProduct($id)
     {
         $product = Product::find($id);
-        $category = Category::orderBy('category','ASC')->get();
+        $category = Category::orderBy('category_name','ASC')->get();
         return view('home.product.edit-product',['product'=>$product,'category'=>$category]);
     }
 
@@ -110,27 +114,27 @@ class HomeController extends Controller
     public function updateProduct(Request $request, $id)
     {
        
-        $file =  $request->file('image_product');
+        $file =  $request->file('product_image');
         
         $imagename = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
        
         $product = Product::find($id);
         if($file){
-            unlink('image_product/'.$product->image_product);
+            unlink('product_image/'.$product->product_image);
 
-            $file->move(public_path('image_product'),$request->nama_product.'-'.$imagename);
+            $file->move(public_path('product_image'),$request->nama_product.'-'.$imagename);
 
         } else {
             unset($request);
         }
 
         $productAttribute = [];
-        $productAttribute['nama_product'] = $request->nama_product;
-        $productAttribute['harga_product'] = $request->harga_product;
-        $productAttribute['deskripsi_product'] = $request->deskripsi_product;
-        $productAttribute['image_product'] =  $request->nama_product.'-'.$imagename;
-        $productAttribute['status_product'] = 'aktif';
+        $productAttribute['product_name'] = $request->nama_product;
+        $productAttribute['product_price'] = $request->harga_product;
+        $productAttribute['product_description'] = $request->deskripsi_product;
+        $productAttribute['product_image'] =  $request->nama_product.'-'.$imagename;
+        $productAttribute['product_status'] = 'aktif';
         $productAttribute['category_id'] = $request->category_id;
 
         Product::find($id)->update($productAttribute);
@@ -142,7 +146,7 @@ class HomeController extends Controller
     {
         $product = Product::find($id);
 
-        unlink('image_product/'.$product->image_product);
+        unlink('product_image/'.$product->product_image);
 
         $product->delete();
        
@@ -153,7 +157,7 @@ class HomeController extends Controller
     public function updatePassword(UpdatePasswordRequest $request) {
         
         $request->user()->update([
-            'password' => Hash::make($request->get('password'))
+            'user_password' => Hash::make($request->get('user_password'))
         ]);
 
         return redirect()->route('beranda');
